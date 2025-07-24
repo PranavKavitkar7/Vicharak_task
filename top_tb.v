@@ -5,19 +5,19 @@ module top_tb;
     reg clk;
     reg reset;
 
-    // Instantiate the top module
+   
     top uut (
         .clk(clk),
         .reset(reset)
     );
 
-    // Clock generation: 10ns period (100 MHz)
+    //  (100 MHz)
     initial begin
         clk = 0;
         forever #5 clk = ~clk;
     end
 
-    // Initial reset (inactive)
+    //  reset
     initial begin
         reset = 1;
         #10
