@@ -1,6 +1,6 @@
 # Vicharak\_task
 
-**Vicharak FPGA Intern Task - By Pranav Kavitkar (19-Bit Architecture)**
+**Vicharak FPGA Intern Task - By Pranav Kavitkar (19-Bit Architecture CPU)**
 
 ---
 
