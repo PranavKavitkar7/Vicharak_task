@@ -86,7 +86,7 @@ Refer to the “Custom Instruction Manual” for complete instruction structures
 ![Image 1](Info%20and%20Manual/info1.png)
 
 ### Image 2
-![Image 2](info%20and%20manual/img2.png)
+![Image 2](Info%20and%20Manual/info2.png)
 
 ### Image 3
-![Image 3](info%20and%20manual/img3.png)
+![Image 3](Info%20and%20Manual/info3.png)
