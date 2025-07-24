@@ -78,3 +78,15 @@ Refer to the “Custom Instruction Manual” for complete instruction structures
                                                   v                       |
                                             (to Write Back)---------------+
 ```
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+## 📷 Image Previews
+
+### Image 1
+![Image 1](info%20and%20manual/img1.png)
+
+### Image 2
+![Image 2](info%20and%20manual/img2.png)
+
+### Image 3
+![Image 3](info%20and%20manual/img3.png)
