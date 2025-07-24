@@ -1,0 +1,123 @@
+`timescale 1ns / 1ps
+
+// ALU Module 
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+module alu (
+    input             clk,
+    input             reset,           // Active-high reset
+    input      [31:0] src1,
+    input      [31:0] src2,
+    input      [31:0] imm,
+    output reg [3:0]  imm_add1,
+    input      [3:0]  imm_addr1,
+    input      [3:0]  imm_address_branch,
+    output reg [3:0]  imm_address_branch_,
+    input      [3:0]  alu_control,
+    output reg [31:0] result,
+    input      [3:0]  rd_in,
+    output reg [3:0]  rd_wr,
+    input             write_reg,
+    output reg        write_reg_,
+    input             bne,
+    input             beq,
+    output reg        bne_,
+    output reg        beq_,
+    input             st,
+    input             ld,
+    output reg        st_,
+    output reg        ld_,
+    input             fft,
+    output reg        fft_,
+    input wire branch_flush,
+    input wire [31:0] alu_fwd,
+    input fwd_r1,
+    input fwd_r2
+);
+
+wire signed [7:0] x0_re = src1[7:0];
+wire signed [7:0] x0_im = src1[15:8];
+wire signed [7:0] x1_re = src1[23:16];
+wire signed [7:0] x1_im = src1[31:24];
+
+// X0 = x0 + x1
+wire signed [8:0] x0_out_re = x0_re + x1_re;
+wire signed [8:0] x0_out_im = x0_im + x1_im;
+
+// X1 = x0 - x1
+wire signed [8:0] x1_out_re = x0_re - x1_re;
+wire signed [8:0] x1_out_im = x0_im - x1_im;
+  
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            result <= 32'd0;
+            end
+        else if(branch_flush) begin    
+         result <= 32'd0;
+            write_reg_<=0;
+         
+         
+        end
+         else begin
+            // Register forwarding
+            rd_wr <= rd_in;
+            imm_address_branch_ <= imm_address_branch;
+            write_reg_ <= write_reg;
+            bne_ <= bne;
+            beq_ <= beq;
+            st_ <= st;
+            ld_ <= ld;
+            fft_ <= fft;
+
+            if (st) begin
+                result <= src1;
+                imm_add1 <= imm_addr1;
+            end
+
+            if (ld || fft) begin
+                imm_add1 <= imm_addr1;
+            end
+
+            if (!ld) begin
+                case (alu_control)
+                    4'b0000: result <= src1 + src2;                        // ADD
+                    4'b0001: result <= src1 - src2;                        // SUB
+                    4'b0010: result <= src1 * src2;                        // MUL
+                    4'b0011: result <= (src2 != 0) ? src1 / src2 : 32'd0;  // DIV
+                    4'b0100: result <= src1 + 1;                           // INC
+                    4'b0101: result <= src1 - 1;                           // DEC
+                    4'b0110: result <= src1 & src2;                        // AND
+                    4'b0111: result <= src1 | src2;                        // OR
+                    4'b1000: result <= src1 ^ src2;                        // XOR
+                    4'b1001: result <= ~src2;                              // NOT
+                    4'b1010: result <= (src1 == src2) ? 32'd1 : 32'd0;     // BEQ
+                    4'b1011: result <= (src1 != src2) ? 32'd1 : 32'd0;     // BNE
+                    4'b1100: result <= {~src1[7:0], ~src1[15:8], ~src1[23:16], ~src1[31:24]}; // ENCRYPT 
+                    4'b1101: result <= {~src1[31:24], ~src1[23:16], ~src1[15:8], ~src1[7:0]}; // DECRYPT
+
+                    //////////////////////// === 2-point FFT ===/////////////////////////////////////
+                    4'b1110: begin
+                       
+                       
+result <= {x1_out_im, x1_out_re, x0_out_im, x0_out_re}; 
+                    end
+4'b1111: begin
+result <= 32'd0;
+
+ rd_wr <= 0;
+            imm_address_branch_ <=0;
+            write_reg_ <=0;
+            bne_ <= 0;
+            beq_ <= 0;
+            st_ <= 0;
+            ld_ <= 0;
+            fft_ <= 0;
+            end
+                    default: result <= 32'd0;
+                endcase
+            end
+        end
+    end
+
+endmodule
