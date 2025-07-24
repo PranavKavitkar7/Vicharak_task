@@ -51,7 +51,7 @@ The processor implements a classic **5-stage RISC pipeline** to maximize instruc
 
 ##  Processor Architecture
 
-Refer to the “Custom Instruction Manual” for complete instruction structures.
+Refer scroll below for complete instruction structures.
 
 ```
                                      +-----------------+
@@ -80,7 +80,7 @@ Refer to the “Custom Instruction Manual” for complete instruction structures
 ```
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-## 📷 Image Previews
+##** Manual**
 
 ### Image 1
 ![Image 1](Info%20and%20Manual/info1.png)
@@ -88,5 +88,3 @@ Refer to the “Custom Instruction Manual” for complete instruction structures
 ### Image 2
 ![Image 2](Info%20and%20Manual/info2.png)
 
-### Image 3
-![Image 3](Info%20and%20Manual/info3.png)
