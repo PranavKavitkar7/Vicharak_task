@@ -1,12 +1,13 @@
 
+
 Vicharak_task
 Vicharak FPGA Intern Task - By Pranav Kavitkar (19-Bit Architecture)
 
 Modules
 This project consists of several Verilog modules that form the processor core and its simulation environment.
 
-├── TOP.v
-│   ├
+├── rtl/
+│   ├── TOP.v
 │   ├── ALU.v
 │   ├── core_control.v
 │   ├── data_mem.v
@@ -17,9 +18,8 @@ This project consists of several Verilog modules that form the processor core an
 │   ├── instruction_mem.v
 │   └── mem_acc.v
 │
-└── sim
+└── sim/
     └── top_tb.v
-    
 Pipeline Stages
 The processor implements a classic 5-stage RISC pipeline to maximize instruction throughput. Each stage is handled by dedicated Verilog modules.
 
@@ -36,7 +36,7 @@ Write-Back (WB): The final stage writes the result from either the ALU or a memo
 The hazard_unit is included in the design to manage data and control hazards, ensuring the pipeline operates correctly.
 
 Processor Architecture
-Please refer to the "Custom Instruction Manual" for details on instructions and their structures.
+Please refer to the "Custom Instruction Manual" for instructions and their structures.
 
                                      +-----------------+
                                      |   Hazard Unit   |
