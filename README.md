@@ -6,7 +6,6 @@
 
 ## 📁 Modules
 
-This project consists of several Verilog modules that form the processor core and its simulation environment.
 
 ```
 ├── rtl/
@@ -27,7 +26,7 @@ This project consists of several Verilog modules that form the processor core an
 
 ---
 
-## 🤩 Pipeline Stages
+##  Pipeline Stages
 
 The processor implements a classic **5-stage RISC pipeline** to maximize instruction throughput. Each stage is handled by dedicated Verilog modules.
 
