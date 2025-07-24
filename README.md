@@ -1,26 +1,25 @@
-
-
-Vicharak_task
+**Vicharak_task**
 Vicharak FPGA Intern Task - By Pranav Kavitkar (19-Bit Architecture)
 
 Modules
 This project consists of several Verilog modules that form the processor core and its simulation environment.
 
-├── rtl/
-│   ├── TOP.v
-│   ├── ALU.v
-│   ├── core_control.v
-│   ├── data_mem.v
-│   ├── gp_regs.v
-│   ├── hazard_unit.v
-│   ├── IFU.v
-│   ├── instruction_deframer.v
-│   ├── instruction_mem.v
-│   └── mem_acc.v
-│
-└── sim/
-    └── top_tb.v
-Pipeline Stages
+rtl/
+TOP.v
+ALU.v
+core_control.v
+data_mem.v
+gp_regs.v
+hazard_unit.v
+IFU.v
+instruction_deframer.v
+instruction_mem.v
+mem_acc.v
+
+sim/
+top_tb.v
+
+**Pipeline Stages**
 The processor implements a classic 5-stage RISC pipeline to maximize instruction throughput. Each stage is handled by dedicated Verilog modules.
 
 Instruction Fetch (IF): The Instruction Fetch Unit (IFU) retrieves the next instruction from the instruction memory (instruction_mem) using the address in the Program Counter (PC).
@@ -35,29 +34,5 @@ Write-Back (WB): The final stage writes the result from either the ALU or a memo
 
 The hazard_unit is included in the design to manage data and control hazards, ensuring the pipeline operates correctly.
 
-Processor Architecture
+**Processor Architecture**
 Please refer to the "Custom Instruction Manual" for instructions and their structures.
-
-                                     +-----------------+
-                                     |   Hazard Unit   |
-                                     +-----------------+
-                                       ^      |      ^
-                                       |      v      |
-+-----------------+   +-----------+    | +----v-----+----+      +-----------------+
-| PC / Stack Ptr  |-->|    IFU    |--->| | Instruction   |      | General Purpose |
-| (Program Counter)|   +-----------+    | | Deframer &    |----->|   Registers     |
-+-----------------+                      | | Core Control  |      |  (incl. SP)     |
-                                       | +-------------+      +-----------------+
-                                       |       |       ^             |      ^
-                                       |       v       |             v      |
-                                       |    +--+-------+--+          |      |
-                                       +--> |      ALU     | <--------+      |
-                                            +-------------+                 |
-                                                  |                       |
-                                                  v                       |
-                                            +-----+--------+              |
-                                       +--> | Memory Access|              |
-                                            +--------------+              |
-                                                  |                       |
-                                                  v                       |
-                                            (to Write Back)---------------+
