@@ -80,7 +80,7 @@ Refer scroll below for complete instruction structures.
 ```
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-##** Manual**
+## **Manual and Info**
 
 ### Image 1
 ![Image 1](Info%20and%20Manual/info1.png)
