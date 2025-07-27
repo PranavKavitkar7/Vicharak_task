@@ -2,7 +2,9 @@
 
 module top (
     input clk,
-    input reset
+    input reset,
+    input [18:0] instruction_input,
+    input write_enable
 );
 
     // Wires/regs for instruction fetch
@@ -70,11 +72,13 @@ module top (
     // Forwarded ALU inputs
     wire [31:0] src1_final = fwd_r1 ? alu_fwd : out_rs1;
     wire [31:0] src2_final = fwd_r2 ? alu_fwd : out_rs2;
+    
+   
 
     // Instruction Fetch Unit
     instruction_fetch_unit IFU (
         .clk(clk),
-        .rst(reset),
+        .reset(reset),
         .imm_address(imm_address),
         .imm_address_jump(imm_address_jump),
         .beq_set(beq_set),
@@ -82,7 +86,9 @@ module top (
         .jump(jump),
         .pc(pc),
         .return_address(return_address),
-        .imm_address_branch(imm_add_final)
+        .imm_address_branch(imm_add_final),
+        .write_enable(write_enable)
+        
     );
 
     // Instruction Memory
@@ -90,7 +96,11 @@ module top (
         .clk(clk),
         .reset(reset),
         .pc(pc),
-        .instruction_code(instruction_code)
+        .instruction_code(instruction_code),
+        .write_enable(write_enable),
+        .instruction_in(instruction_input)
+       
+      
     );
 
     // Instruction Decode Unit
