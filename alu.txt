@@ -52,6 +52,7 @@ wire signed [8:0] x1_out_im = x0_im - x1_im;
     always @(posedge clk or posedge reset) begin
         if (reset) begin
             result <= 32'd0;
+            st_<=0;
             end
         else if(branch_flush) begin    
          result <= 32'd0;
@@ -69,7 +70,7 @@ wire signed [8:0] x1_out_im = x0_im - x1_im;
             st_ <= st;
             ld_ <= ld;
             fft_ <= fft;
-
+imm_add1 <= imm_addr1;
             if (st) begin
                 result <= src1;
                 imm_add1 <= imm_addr1;
@@ -103,16 +104,16 @@ wire signed [8:0] x1_out_im = x0_im - x1_im;
 result <= {x1_out_im, x1_out_re, x0_out_im, x0_out_re}; 
                     end
 4'b1111: begin
-result <= 32'd0;
+//result <= 32'd0;
 
- rd_wr <= 0;
-            imm_address_branch_ <=0;
-            write_reg_ <=0;
-            bne_ <= 0;
-            beq_ <= 0;
-            st_ <= 0;
-            ld_ <= 0;
-            fft_ <= 0;
+ //rd_wr <= 0;
+           // imm_address_branch_ <=0;
+           // write_reg_ <=0;
+          //  bne_ <= 0;
+           // beq_ <= 0;
+          // st_ <= 0;
+            //ld_ <= 0;
+           // fft_ <= 0;
             end
                     default: result <= 32'd0;
                 endcase
