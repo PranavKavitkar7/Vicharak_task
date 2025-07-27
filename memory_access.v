@@ -52,6 +52,7 @@ module mem_stage (
             ld_<=0;
              imm_address_branch_ <=0;
              write_data_mem<=0;
+             branch_flush<=0;
         end else begin
         if(beq==1 && alu_result_in==32'd1)begin
         beq_set<=1;
@@ -60,6 +61,7 @@ module mem_stage (
         
         
         
+  
         
         else if(bne==1 && alu_result_in==32'd1)begin
         bne_set<=1;
@@ -71,7 +73,7 @@ module mem_stage (
           bne_set<=0;
         end
         
-        
+       write_data_mem<=alu_result_in;
         if (st)begin
         write_data_mem<=alu_result_in;
         end
@@ -84,13 +86,13 @@ module mem_stage (
         branch_flush<=0;
         end
         
-        
+              //en_<=1;
         imm_addr1_<=imm_addr1;
             if(ld)begin
             alu_result_out <= read_data_mem;
             end
             else begin
-            alu_result_out <= alu_result_in;
+             alu_result_out <= alu_result_in;
             end
           //  write_reg     <= write_reg_;
             rd_final<=rd_in;
