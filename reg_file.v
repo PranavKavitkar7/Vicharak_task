@@ -36,6 +36,7 @@ output [31:0] out_rs2
     
     always@(posedge clk or posedge reset)begin
     if (reset) begin
+    
     for (i=0;i<16;i=i+1)
     regs[i]<=32'b0;
     
