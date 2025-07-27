@@ -1,5 +1,12 @@
 `timescale 1ns / 1ps
 
+
+
+// Cheaks for hazards
+// Data forwarding
+// Instruction flushing logic for branch and jump
+
+
 module hazard_unit(
     input  wire        clk,
     input  wire        reset,
@@ -23,11 +30,12 @@ module hazard_unit(
     input  wire [31:0] alu_result_wb
 );
 
-    // Flush logic
+    // Flushing  logic
     assign flush_jump   = jump;
     assign branch_flush = branched;
 
-    // Forwarding conditions (only if write_reg is asserted)
+
+    
     wire match_r1_ma = write_reg && (r1_dec == ma_dest) && (ma_dest != 0);
     wire match_r2_ma = write_reg && (r2_dec == ma_dest) && (ma_dest != 0);
     wire match_r1_wb = write_reg && (r1_dec == wb_dest) && (wb_dest != 0);
